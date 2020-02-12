@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is a test jeah</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+
+            $("#getButton").click(function() {
+                $.get("api/movies", function(movies){
+                    console.log(movies);
+                });
+            });
+
+            $("#postButton").click(function() {
+                var movie = {
+                    title: "Titwererle",
+                    year: 2012,
+                    rating: 8
+                };
+
+                var jsonObject = JSON.stringify(movie);
+
+                $.ajax({
+                    url: "api/movies",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: jsonObject,
+                    success: function() {
+                        alert('We succeeded!');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>This is a test</h1>
+
+<button id="getButton">GET: Click me!</button>
+<button id="postButton">POST: Click me!</button>
+
+
+</body>
+</html>
