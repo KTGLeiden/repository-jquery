@@ -1,7 +1,12 @@
 
 function getMovies() {
     $.get("api/movies", function (movies) {
-        console.log(movies);
+        $("#movies").empty();
+        for (var i = 0; i < movies.length; i++) {
+            // Do something
+            const movie = movies[i];
+            $("#movies").append('<p>' + movie.title + '</p>');
+        }
     });
 }
 
