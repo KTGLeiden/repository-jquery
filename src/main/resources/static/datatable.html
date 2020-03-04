@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datatable fun</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var movieTable = $('#movieTable').DataTable({
+                ajax: {
+                    url: 'api/movies',
+                    dataSrc: ''
+                },
+                columns: [
+                    {data: 'id'},
+                    {data: 'title'},
+                    {data: 'rating'},
+                    {data: 'year'}
+<!--                    {data: null, render: (data, type, row) => data.id }-->
+                    //'<td><button class="delete">DELETE '+data.id+'</button></td>'}
+                ]
+            });
+
+            $('#reloadButton').click(function() {
+                movieTable.ajax.reload();
+            });
+
+            $('#clearTable').click(function() {
+                movieTable.clear().draw();
+                $('#exampleModal').modal('hide');
+            });
+
+            $('#addRow').click(function() {
+                movieTable.row.add({
+                    id: 6,
+                    title: 'Rain man',
+                    rating: 5,
+                    year: 2000
+                }).draw();
+
+                movieTable.row.add($('<tr><td>1</td><td>2</td><td>3</td><td><button></button></td></tr>')).draw();
+            });
+
+            $('#whatever').click(function() {
+                // DO SOMETHING
+            });
+
+            alert('This is ugly man');
+
+<!--            $('#exampleModal').toggle();-->
+
+
+            $("#movieTable").on('click', 'button', function() {
+                movieTable.row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+    DANGER
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Don't try this at home!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="clearTable">Do something</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <button id="reloadButton">Reload!</button>
+    <button id="clearButton">CLEAR!</button>
+    <button id="addRow">Add row!</button>
+
+    <table id="movieTable">
+        <thead>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Year</th>
+        </thead>
+    </table>
+
+</body>
+</html>

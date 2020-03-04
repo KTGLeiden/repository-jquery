@@ -4,9 +4,27 @@
         <meta charset="UTF-8" />
         <title>This is a test jeah</title>
 
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="js/main.js"></script>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+        <script>
+        $(document).ready(function() {
+            $("#myTable").dataTable( {
+                ajax:  {
+                    url: 'api/movies',
+                    dataSrc: ''
+                },
+                "columns": [
+                    { "data": "title" },
+                    { "data": "rating" },
+                    { "data": "year" }
+                ]
+            });
+        });
+        </script>
     </head>
     <body>
         <h1>This is a test</h1>
@@ -20,6 +38,17 @@
         <input id="yearInput" type="number" placeholder="Year" /><br />
         <button id="postButton">Send</button><br />
 
+
         <div id="movies"></div>
+
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>rating</th>
+                    <th>year</th>
+                </tr>
+            </thead>
+        </table>
     </body>
 </html>
