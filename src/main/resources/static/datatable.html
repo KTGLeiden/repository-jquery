@@ -25,8 +25,12 @@
                     {data: 'title'},
                     {data: 'rating'},
                     {data: 'year'},
-                    {data: null, render: (data, type, row) =>
-                    '<td><button>DELETE ' + data.id + '</button></td>'}
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            return '<td><button class="delete" movieId="' + data.id + '">DELETE ' + data.id + '</button></td>';
+                        }
+                    }
                 ]
             });
 
@@ -52,10 +56,8 @@
                 // DO SOMETHING
             });
 
-            $("#movieTable").on('click', 'button', function() {
-                movieTable.row($(this).parents('tr'))
-                    .remove()
-                    .draw();
+            $("#movieTable").on('click', 'button.delete', function() {
+                var movieId = $(this).attr('movieId');
             });
         });
 
@@ -100,7 +102,7 @@
             <th>Title</th>
             <th>Rating</th>
             <th>Year</th>
-        <th></th>
+            <th></th>
         </thead>
     </table>
 
