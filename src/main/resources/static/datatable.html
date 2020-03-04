@@ -24,9 +24,9 @@
                     {data: 'id'},
                     {data: 'title'},
                     {data: 'rating'},
-                    {data: 'year'}
-<!--                    {data: null, render: (data, type, row) => data.id }-->
-                    //'<td><button class="delete">DELETE '+data.id+'</button></td>'}
+                    {data: 'year'},
+                    {data: null, render: (data, type, row) =>
+                    '<td><button>DELETE ' + data.id + '</button></td>'}
                 ]
             });
 
@@ -46,18 +46,11 @@
                     rating: 5,
                     year: 2000
                 }).draw();
-
-                movieTable.row.add($('<tr><td>1</td><td>2</td><td>3</td><td><button></button></td></tr>')).draw();
             });
 
             $('#whatever').click(function() {
                 // DO SOMETHING
             });
-
-            alert('This is ugly man');
-
-<!--            $('#exampleModal').toggle();-->
-
 
             $("#movieTable").on('click', 'button', function() {
                 movieTable.row($(this).parents('tr'))
@@ -107,6 +100,7 @@
             <th>Title</th>
             <th>Rating</th>
             <th>Year</th>
+        <th></th>
         </thead>
     </table>
 
