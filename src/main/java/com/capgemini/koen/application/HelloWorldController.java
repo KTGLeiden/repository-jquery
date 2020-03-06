@@ -1,12 +1,18 @@
 package com.capgemini.koen.application;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.capgemini.koen.application.models.Message;
+import com.capgemini.koen.application.repositories.HelloWorldRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class HelloWorldController {
+
+    @Autowired
+    private HelloWorldRepository helloWorldRepository;
 
     @GetMapping("/hello")
     public String index() {
@@ -17,5 +23,16 @@ public class HelloWorldController {
     public String anotherIndex() {
         return "Hi, Hasan!";
     }
+
+    @GetMapping()
+    public List<Message> getAll() {
+        return helloWorldRepository.findAll();
+    }
+
+    @PostMapping()
+    public Message save(@RequestBody Message message) {
+        return helloWorldRepository.save(message);
+    }
+
 }
 
