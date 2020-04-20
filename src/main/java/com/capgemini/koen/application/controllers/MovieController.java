@@ -19,7 +19,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie addMovie(@RequestBody Movie movie) {
-        return movieRepository.save(movie);
+    public void addMovie(@RequestBody Movie movie) {
+        movieRepository.save(movie);
     }
 }

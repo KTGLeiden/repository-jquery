@@ -12,8 +12,8 @@ public class Movie {
     private Long id;
 
     private String title;
-    private int rating;
-    private int year;
+    private Integer rating;
+    private Integer year;
 
     public Movie(Long id, String title, int rating, int year) {
         this.id = id;
