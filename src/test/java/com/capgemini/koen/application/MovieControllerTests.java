@@ -49,6 +49,7 @@ public class MovieControllerTests {
     }
 
     @Test
+
     public void testAddMovie() throws Exception {
         Movie movie = new Movie(1398L, "Test title", 9, 1999);
         ObjectMapper mapper = new ObjectMapper();
@@ -61,8 +62,8 @@ public class MovieControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andDo(print())
-//                .andExpect(jsonPath("$.id", is(movie.getId().intValue())))
-//                .andExpect(jsonPath("$.title", is(movie.getTitle())))
+                .andExpect(jsonPath("$.id", is(movie.getId().intValue())))
+                .andExpect(jsonPath("$.title", is(movie.getTitle())))
                 .andExpect(status().isOk());
 
         verify(movieRepository, times(1)).save(Mockito.any(Movie.class));
@@ -86,5 +87,4 @@ public class MovieControllerTests {
 
         Mockito.verify(movieRepository, times(1)).findAll();
     }
-
 }

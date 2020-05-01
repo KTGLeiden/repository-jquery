@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/movies")
 public class MovieController {
     @Autowired
@@ -19,7 +20,13 @@ public class MovieController {
     }
 
     @PostMapping
-    public void addMovie(@RequestBody Movie movie) {
-        movieRepository.save(movie);
+    public Movie addMovie(@RequestBody Movie movie) {
+        return movieRepository.save(movie);
     }
+
+    @GetMapping("/search/year/{year}")
+    public List<Movie> searchMovieByYear(@PathVariable int year) {
+        return movieRepository.findByYear(year);
+    }
+
 }

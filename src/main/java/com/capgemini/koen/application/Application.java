@@ -13,15 +13,6 @@ public class Application {
 	public static Predicate<String> predicate;
 
 	public static void main(String[] args) {
-		test();
 		SpringApplication.run(Application.class, args);
 	}
-
-	public static void test() {
-		Integer x = null;
-		int y = x;
-		System.out.println(y);
-	}
-
-
 }
